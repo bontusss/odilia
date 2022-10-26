@@ -1,14 +1,16 @@
 from django.contrib import admin
 
-from dictionary.models import Word, Definition
+from dictionary.models import Jargon,Category, Author
 
 # Register your models here.
-class WordAdmin(admin.ModelAdmin):
-    list_display = ('name', 'author', 'created', 'updated')
+# class JargonAdmin(admin.ModelAdmin):
+    # list_display = ('name', 'author', 'created', 'updated')
 
-admin.site.register(Word, WordAdmin)
+# admin.site.register(Jargon, JargonAdmin)
 
-admin.site.register(Definition)
+admin.site.register(Jargon)
+admin.site.register(Category)
+admin.site.register(Author)
 
 # class DefinitionAdmin(admin.ModelAdmin):
 #     list_display = ('meaning', 'created', 'updated')

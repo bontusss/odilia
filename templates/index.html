@@ -1,57 +1,165 @@
+{% extends 'base.html' %}
 {% load static %}
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="author" content="colorlib.com" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Poppins"
-      rel="stylesheet"
-    />
-    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
-  </head>
-  <body>
-    <div class="s130">
-      <form action="{% url 'search-results' %}" method="get">
-        <div class="logo">
-          <img id="" src="{% static 'images/logo.png' %}" alt="" />
-        </div>
-        <div class="inner-form">
-          <div class="input-field first-wrap">
-            <div class="svg-wrapper">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
-                ></path>
-              </svg>
-            </div>
-            <input
-              id="search"
-              type="text"
-              name="q"
-              placeholder="What are you looking for?"
-            />
-          </div>
-          <div class="input-field second-wrap">
-            <button class="btn-search" type="submit">SEARCH</button>
-          </div>
-        </div>
-        <span class="info"
-          >ex. <a href="#">Game</a>, Music, Video, Photography</span
-        >
-        <footer>
-          <p>&#169; 2022.</p>
-        </footer>
-        <div></div>
-      </form>
-    </div>
-    <script src="js/extention/choices.js"></script>
-  </body>
-  <!-- This templates was made by Colorlib (https://colorlib.com) -->
-</html>
+ {% block content %}
+    
+{% comment %} header {% endcomment %}
+<div class="container">
+	<div class="jumbotron jumbotron-fluid mb-3 pt-0 pb-0 bg-lightblue position-relative">
+		<div class="pl-4 pr-0 h-100 tofront">
+			<div class="row justify-content-between">
+				<div class="col-md-6 pt-6 pb-6 align-self-center">
+					<h1 class="secondfont mb-3 font-weight-bold">Odilia is a dictionary by techies and for techies.</h1>
+					<p class="mb-3">
+						The crowd sourced repository for tech related jargons created by you, engineers, designers, thought leaders and the developer community generally.
+					</p>
+					<a href="./article.html" class="btn btn-dark">Read More</a>
+				</div>
+				<div class="col-md-6 d-none d-md-block pr-0" style="background-size:cover;background-image:url({% static 'assets/img/demo/f-banner.jpg' %});">	</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% comment %} end header {% endcomment %}
+    
+    
+{% comment %} main {% endcomment %}
+    
+<div class="container pt-4 pb-4">
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="card border-0 mb-4 box-shadow h-xl-300">              
+                <img src="{{daily_word.image_url}}" style="height: 150px; width:auto; background-size: cover; background-repeat: no-repeat;" />              
+				<div class="card-body px-0 pb-0 d-flex flex-column align-items-start">
+					<h2 class="h4 font-weight-bold">
+					<a class="text-dark" href="{{daily_word.get_absolute_url}}">{{daily_word.word}}</a>
+					</h2>
+					<p class="card-text">
+						 {{daily_word.excerpt}}
+					</p>
+					<div>
+						<small class="d-block"><a class="text-muted" href="./author.html">{{daily_word.get_username}}</a></small>
+						<small class="text-muted">{{daily_word.updated|timesince}} ago &middot; {{daily_word.visit_count}} views</small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="flex-md-row mb-4 box-shadow h-xl-300">
+				{% for w in words %}
+				<div class="mb-3 d-flex align-items-center">
+					<img height="80" src="{{w.image_url}}">
+					<div class="pl-3">
+						<h2 class="mb-2 h6 font-weight-bold">
+						<a class="text-dark" href="{{word.get_absolute_url}}">{{w.word}}</a>
+						</h2>
+						<div class="card-text text-muted small">
+							 {{w.get_username}} in {{w.category}}
+						</div>
+						<small class="text-muted">{{w.updated|date:"M d"}} &middot; {{w.visit_count}} views</small>
+					</div>
+				</div>
+				
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+    
+<div class="container">
+	<div class="row justify-content-between">
+		<div class="col-md-8">
+			<h5 class="font-weight-bold spanborder"><span>All Stories</span></h5>
+			<div class="mb-3 d-flex justify-content-between">
+				<div class="pr-3">
+					<h2 class="mb-1 h4 font-weight-bold">
+					<a class="text-dark" href="./article.html">Nearly 200 Great Barrier Reef coral species also live in the deep sea</a>
+					</h2>
+					<p>
+						There are more coral species lurking in the deep ocean that previously thought.
+					</p>
+					<div class="card-text text-muted small">
+						 Jake Bittle in SCIENCE
+					</div>
+					<small class="text-muted">Dec 12 &middot; 5 min read</small>
+				</div>
+				<img height="120" src="./assets/img/demo/blog8.jpg">
+			</div>
+			<div class="mb-3 d-flex justify-content-between">
+				<div class="pr-3">
+					<h2 class="mb-1 h4 font-weight-bold">
+					<a class="text-dark" href="./article.html">East Antarctica's glaciers are stirring</a>
+					</h2>
+					<p>
+						Nasa says it has detected the first signs of significant melting in a swathe of glaciers in East Antarctica.
+					</p>
+					<div class="card-text text-muted small">
+						 Jake Bittle in SCIENCE
+					</div>
+					<small class="text-muted">Dec 12 &middot; 5 min read</small>
+				</div>
+				<img height="120" src="./assets/img/demo/1.jpg">
+			</div>
+			<div class="mb-3 d-flex justify-content-between">
+				<div class="pr-3">
+					<h2 class="mb-1 h4 font-weight-bold">
+					<a class="text-dark" href="./article.html">50 years ago, armadillos hinted that DNA wasn’t destiny</a>
+					</h2>
+					<p>
+						Nasa says it has detected the first signs of significant melting in a swathe of glaciers in East Antarctica.
+					</p>
+					<div class="card-text text-muted small">
+						 Jake Bittle in SCIENCE
+					</div>
+					<small class="text-muted">Dec 12 &middot; 5 min read</small>
+				</div>
+				<img height="120" src="./assets/img/demo/5.jpg">
+			</div>
+		</div>
+		<div class="col-md-4 pl-4">
+            <h5 class="font-weight-bold spanborder"><span>Popular</span></h5>
+			<ol class="list-featured">
+				<li>
+				<span>
+				<h6 class="font-weight-bold">
+				<a href="./article.html" class="text-dark">Did Supernovae Kill Off Large Ocean Animals?</a>
+				</h6>
+				<p class="text-muted">
+					Jake Bittle in SCIENCE
+				</p>
+				</span>
+				</li>
+				<li>
+				<span>
+				<h6 class="font-weight-bold">
+				<a href="./article.html" class="text-dark">Humans Reversing Climate Clock: 50 Million Years</a>
+				</h6>
+				<p class="text-muted">
+					Jake Bittle in SCIENCE
+				</p>
+				</span>
+				</li>
+				<li>
+				<span>
+				<h6 class="font-weight-bold">
+				<a href="./article.html" class="text-dark">Unprecedented Views of the Birth of Planets</a>
+				</h6>
+				<p class="text-muted">
+					Jake Bittle in SCIENCE
+				</p>
+				</span>
+				</li>
+				<li>
+				<span>
+				<h6 class="font-weight-bold">
+				<a href="./article.html" class="text-dark">Effective New Target for Mood-Boosting Brain Stimulation Found</a>
+				</h6>
+				<p class="text-muted">
+					Jake Bittle in SCIENCE
+				</p>
+				</span>
+				</li>
+			</ol>
+		</div>
+	</div>
+</div>
+{% endblock content %}

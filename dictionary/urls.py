@@ -2,9 +2,9 @@
 
 from django.urls import path
 
-from dictionary.views import HomePageView, SearchResultsView
+from dictionary.views import HomePageView, SingleWordView
 
 urlpatterns = [
     path("", HomePageView.as_view(), name="index"),
-    path("search/", SearchResultsView.as_view(), name='search-results')
+    path('word/<int:id>/', SingleWordView.as_view(), name="definition")
 ]
